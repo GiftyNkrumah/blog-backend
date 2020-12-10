@@ -41,4 +41,13 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('user', userSchema)
 
+userSchema.pre('save', function() {
+    if (this.password !== null || undefined) {
+        bcrypt.hash(this.password, 'secret-text', function(err, hash) {
+            this.password = hash
+        })
+    }
+    next()
+})
+
 module.exports = User
