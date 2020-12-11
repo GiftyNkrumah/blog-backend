@@ -31,7 +31,6 @@ function handleError(error) {
 
 const userCtrl = {}
 
-
 // Create a new user
 userCtrl.createUser = async(req, res) => {
     try {
@@ -43,6 +42,15 @@ userCtrl.createUser = async(req, res) => {
         res.status(400).json({warnings})
     }
 }
+
+// const signup = async(request, response) =>  {
+//     const {firstname, middlename, lastname, username, email, password} = request.body
+//     if (firstname && lastname && username && email && password) {
+//         const user = User({firstname, middlename, lastname, username, email, password})
+//         const newUser = await user.save()
+//         response.send(newUser)
+//     }
+// }
 
 // Read a user detail
 userCtrl.getUserDetails = async(req, res) => {

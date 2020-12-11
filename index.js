@@ -4,6 +4,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const path = require('path')
 
+const app = express()
+
 // variables
 const dbLink = process.env.DB_LINK
 const port = process.env.DB_PORT
@@ -18,13 +20,13 @@ mongoose.connect(dbLink, {useNewUrlParser: true, useUnifiedTopology: true, useCr
     console.log(dbLink, port)
 })
 
+// middlewares: a normal javascript function that has access to the request and response object and can modify it
+app.use(express.json())
+app.use(express.static("build"))     // Sets up a static server
+
 app.get('/', (req, res) => {
     res.status(200).sendFile(path.join(__dirname, 'build', 'index.html'))
 })
-
-// middlewares
-const app = express()
-app.use(express.json())
 
 // routes
 app.use(userRoute)
