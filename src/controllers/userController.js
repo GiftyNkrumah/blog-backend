@@ -37,7 +37,7 @@ userCtrl.createUser = async(req, res) => {
         let newUser = new User(req.body)
         let result = await newUser.save()
         res.status(200).send({message: 'Account created', result})
-    } catch {
+    } catch (error) {
         const warnings = handleError(error)
         res.status(400).json({warnings})
     }
@@ -59,7 +59,7 @@ userCtrl.getUserDetails = async(req, res) => {
         if (!person) {
             res.status(400).send({message: 'Username not found'})
         } else {
-            res.status(200).send({messsage: 'User logged in'})
+            res.status(200).send({message: 'User logged in'})
         }
     } catch (error) {
         const warnings = handleError(error)
@@ -94,7 +94,7 @@ userCtrl.deleteUser = async(req, res) => {
     try {
         let person = await User.findOneAndDelete({_id: req.params.id})
         res.status(200).send({message: 'Account deleted'})
-    } catch {
+    } catch (error) {
         const warnings = handleError(error)
         res.status(400).json({warnings})
     }

@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
     },
     
     middlename: {
-        type: String
+        type: String,
+        required: false
     },
 
     lastname: {
